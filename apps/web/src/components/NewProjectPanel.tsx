@@ -109,7 +109,7 @@ const DESIGN_PLATFORMS: Array<{
   },
 ];
 
-export type CreateTab = 'prototype' | 'live-artifact' | 'deck' | 'template' | 'media' | 'other';
+export type CreateTab = 'prototype' | 'live-artifact' | 'deck' | 'template' | 'media' | 'other' | 'prd';
 export type MediaSurface = 'image' | 'video' | 'audio';
 
 export interface CreateInput {
@@ -159,6 +159,7 @@ const TAB_LABEL_KEYS: Record<CreateTab, keyof Dict> = {
   template: 'newproj.tabTemplate',
   media: 'newproj.tabMedia',
   other: 'newproj.tabOther',
+  prd: 'newproj.tabPrd',
 };
 
 // Maps the New Project tab + media surface to the apply-result target
@@ -2884,6 +2885,14 @@ function buildMetadata(input: {
         : {}),
       ...inspirations,
     };
+  }
+  if (input.tab === 'prd') {
+    return {
+      kind: 'prd' as ProjectKind,
+      prdType: 'greenfield',
+      schemaId: 'standard',
+      targetAudience: 'engineering',
+    } as ProjectMetadata;
   }
   return { kind: 'other', ...base, ...inspirations };
 }

@@ -64,6 +64,7 @@ export const DEFAULT_SCENARIO_PLUGIN_BY_KIND: Record<ProjectKind, DefaultScenari
   image:     'od-media-generation',
   video:     'od-media-generation',
   audio:     'od-media-generation',
+  prd:       'od-default',
   other:     'od-new-generation',
 };
 

@@ -112,6 +112,7 @@ export type TrackingProjectKind =
   // The dashboard reads it on run_created / run_finished to split the
   // DS generation funnel from regular artifact runs.
   | 'design_system'
+  | 'prd'
   | 'other';
 
 // Where a project originated. Matches CSV row 9 / row 17 enum.
@@ -150,6 +151,7 @@ export type TrackingNewProjectTab =
   | 'slide_deck'
   | 'from_template'
   | 'media'
+  | 'prd'
   | 'other';
 
 export type TrackingFidelity =
@@ -3045,6 +3047,8 @@ export function createTabToTracking(tab: string): TrackingNewProjectTab {
       return 'media';
     case 'other':
       return 'other';
+    case 'prd':
+      return 'prd';
     default:
       return 'prototype';
   }
