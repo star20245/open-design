@@ -1164,6 +1164,7 @@ export const fr: Dict = {
   'newproj.tabTemplate': 'Depuis un modèle',
   'newproj.tabMedia': 'Média',
   'newproj.tabOther': 'Autre',
+  'newproj.tabPrd': 'PRD',
   'newproj.titlePrototype': 'Nouveau prototype',
   'newproj.titleLiveArtifact': 'Nouvel artefact dynamique',
   'newproj.titleDeck': 'Nouveau diaporama',

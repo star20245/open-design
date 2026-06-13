@@ -1164,6 +1164,7 @@ export const th: Dict = {
   'newproj.tabTemplate': 'จากเทมเพลต',
   'newproj.tabMedia': 'สื่อ',
   'newproj.tabOther': 'อื่นๆ',
+  'newproj.tabPrd': 'PRD',
   'newproj.titlePrototype': 'ต้นแบบใหม่',
   'newproj.titleLiveArtifact': 'Live artifact ใหม่',
   'newproj.titleDeck': 'สไลด์นำเสนอใหม่',

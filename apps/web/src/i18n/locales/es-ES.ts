@@ -1164,6 +1164,7 @@ export const esES: Dict = {
   'newproj.tabTemplate': 'Desde plantilla',
   'newproj.tabMedia': 'Medios',
   'newproj.tabOther': 'Otro',
+  'newproj.tabPrd': 'PRD',
   'newproj.titlePrototype': 'Nuevo prototipo',
   'newproj.titleLiveArtifact': 'Nuevo artefacto en vivo',
   'newproj.titleDeck': 'Nueva presentación',

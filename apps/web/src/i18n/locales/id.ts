@@ -1164,6 +1164,7 @@ export const id: Dict = {
   'newproj.tabTemplate': 'Dari templat',
   'newproj.tabMedia': 'Media',
   'newproj.tabOther': 'Lainnya',
+  'newproj.tabPrd': 'PRD',
   'newproj.titlePrototype': 'Prototype baru',
   'newproj.titleLiveArtifact': 'Live artifact baru',
   'newproj.titleDeck': 'Slide deck baru',

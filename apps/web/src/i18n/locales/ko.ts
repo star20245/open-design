@@ -1164,6 +1164,7 @@ export const ko: Dict = {
   'newproj.tabTemplate': '템플릿에서 시작',
   'newproj.tabMedia': '미디어',
   'newproj.tabOther': '기타',
+  'newproj.tabPrd': 'PRD',
   'newproj.titlePrototype': '새 프로토타입',
   'newproj.titleLiveArtifact': '새 라이브 아티팩트',
   'newproj.titleDeck': '새 슬라이드 덱',

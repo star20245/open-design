@@ -1164,6 +1164,7 @@ export const uk: Dict = {
   'newproj.tabTemplate': 'З шаблону',
   'newproj.tabMedia': 'Медіа',
   'newproj.tabOther': 'Інше',
+  'newproj.tabPrd': 'PRD',
   'newproj.titlePrototype': 'Новий прототип',
   'newproj.titleLiveArtifact': 'Новий live-артефакт',
   'newproj.titleDeck': 'Нова презентація',

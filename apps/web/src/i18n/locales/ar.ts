@@ -1164,6 +1164,7 @@ export const ar: Dict = {
   'newproj.tabTemplate': 'من قالب',
   'newproj.tabMedia': 'الوسائط',
   'newproj.tabOther': 'آخر',
+  'newproj.tabPrd': 'PRD',
   'newproj.titlePrototype': 'نموذج أولي جديد',
   'newproj.titleLiveArtifact': 'عنصر مباشر جديد',
   'newproj.titleDeck': 'عرض تقديمي جديد',

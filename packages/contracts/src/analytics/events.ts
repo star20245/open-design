@@ -3020,6 +3020,8 @@ export function projectKindToTracking(
     case 'live-artifact':
     case 'live_artifact':
       return 'live_artifact';
+    case 'prd':
+      return 'prd';
     default:
       return null;
   }

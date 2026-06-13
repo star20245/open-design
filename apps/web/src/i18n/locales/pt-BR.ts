@@ -1164,6 +1164,7 @@ export const ptBR: Dict = {
   'newproj.tabTemplate': 'A partir de template',
   'newproj.tabMedia': 'Mídia',
   'newproj.tabOther': 'Outro',
+  'newproj.tabPrd': 'PRD',
   'newproj.titlePrototype': 'Novo protótipo',
   'newproj.titleLiveArtifact': 'Novo artefato live',
   'newproj.titleDeck': 'Nova apresentação',

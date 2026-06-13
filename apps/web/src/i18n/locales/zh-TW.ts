@@ -1164,6 +1164,7 @@ export const zhTW: Dict = {
   'newproj.tabTemplate': '從範本',
   'newproj.tabMedia': '媒體',
   'newproj.tabOther': '其它',
+  'newproj.tabPrd': 'PRD 需求文件',
   'newproj.titlePrototype': '新建原型',
   'newproj.titleLiveArtifact': '新建即時看板',
   'newproj.titleDeck': '新建投影片',

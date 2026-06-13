@@ -1164,6 +1164,7 @@ export const ja: Dict = {
   'newproj.tabTemplate': 'テンプレートから',
   'newproj.tabMedia': 'メディア',
   'newproj.tabOther': 'その他',
+  'newproj.tabPrd': 'PRD',
   'newproj.titlePrototype': '新しいプロトタイプ',
   'newproj.titleLiveArtifact': '新しいライブアーティファクト',
   'newproj.titleDeck': '新しいスライドデッキ',
