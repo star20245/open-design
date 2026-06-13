@@ -105,6 +105,39 @@ Inside a project's Studio, the same design system streams out multiple artifact 
 
 ---
 
+## PRD Agent — requirements engineering, not design
+
+Open Design's architecture is also a **general-purpose knowledge-layering framework** — not bound to design. The repository ships a complete **PRD (Product Requirements Document) Agent** that demonstrates how the same 7-layer prompt architecture, quality rule system, and plugin pipeline can be adapted to requirements engineering:
+
+- **7-layer prompt stack**: injection resistance → PRD discovery form → PM identity → company/product memory → PRD Schema (SCHEMA.md) → quality rules → PRD skill (SKILL.md)
+- **3 PRD schema templates**: Standard (10-section), Lean Canvas, Agile Epic — the PRD equivalent of DESIGN.md
+- **6 quality rules** (R0–R6): no vague requirements, scope triage, non-functional floor, out-of-scope explicit, no filler, concrete dependencies — the PRD equivalent of Craft rules
+- **Linter**: grep-style P0/P1/P2 rule scanning with auto-feedback to the agent for self-correction
+- **5-panelist Critique Theater**: PM / Engineer / Designer / QA / Stakeholder — the PRD equivalent of OD's design critique
+- **CLI**: `od prd new | generate | lint | export | schemas | rules`
+- **Export**: PDF / DOCX / HTML document export
+
+The architecture analysis that informed this implementation lives at [`docs/prd-agent-reuse-analysis.zh-CN.md`](docs/prd-agent-reuse-analysis.zh-CN.md). All PRD Agent source code is at:
+
+| System | Source |
+|---|---|
+| Prompt composer | [`apps/daemon/src/prompts/prd-composer.ts`](apps/daemon/src/prompts/prd-composer.ts) |
+| PRD linter | [`apps/daemon/src/lint-prd.ts`](apps/daemon/src/lint-prd.ts) |
+| Schema resolver | [`apps/daemon/src/prd-schema-resolver.ts`](apps/daemon/src/prd-schema-resolver.ts) |
+| Critique Theater | [`apps/daemon/src/prompts/prd-critique.ts`](apps/daemon/src/prompts/prd-critique.ts) |
+| Pipeline | [`apps/daemon/src/prd-pipeline.ts`](apps/daemon/src/prd-pipeline.ts) |
+| Connectors | [`apps/daemon/src/prd-connectors.ts`](apps/daemon/src/prd-connectors.ts) |
+| Export | [`apps/daemon/src/prd-export.ts`](apps/daemon/src/prd-export.ts) |
+| CLI | [`apps/daemon/src/prd-cli.ts`](apps/daemon/src/prd-cli.ts) |
+| Contracts | [`packages/contracts/src/prd.ts`](packages/contracts/src/prd.ts) |
+| Events | [`packages/contracts/src/prd-events.ts`](packages/contracts/src/prd-events.ts) |
+| Skills | [`plugins/_official/prd/`](plugins/_official/prd/) |
+| Schemas | [`prd-schemas/`](prd-schemas/) |
+| Rules | [`prd-rules/`](prd-rules/) |
+| Tests | [`apps/daemon/src/__tests__/prd-agent.test.ts`](apps/daemon/src/__tests__/prd-agent.test.ts) |
+
+---
+
 ## Platform Compatibility
 
 > Open Design ships as **skills, a CLI, and an MCP server** that mainstream coding agents consume natively. Once OD is installed, a single `od mcp install <agent>` wires the MCP server into that agent's config, and you call the same tools from inside any agent.
