@@ -109,7 +109,7 @@ const DESIGN_PLATFORMS: Array<{
   },
 ];
 
-export type CreateTab = 'prototype' | 'live-artifact' | 'deck' | 'template' | 'media' | 'other';
+export type CreateTab = 'prototype' | 'live-artifact' | 'deck' | 'template' | 'media' | 'other' | 'prd';
 export type MediaSurface = 'image' | 'video' | 'audio';
 
 export interface CreateInput {
@@ -159,6 +159,7 @@ const TAB_LABEL_KEYS: Record<CreateTab, keyof Dict> = {
   template: 'newproj.tabTemplate',
   media: 'newproj.tabMedia',
   other: 'newproj.tabOther',
+  prd: 'newproj.tabPrd',
 };
 
 // Maps the New Project tab + media surface to the apply-result target
@@ -2874,16 +2875,15 @@ function buildMetadata(input: {
       };
     }
     const audioModel = input.audioModel.trim();
+    return { kind, audioKind: input.audioKind, ...(audioModel ? { audioModel } : {}), audioDuration: input.audioDuration, ...(input.audioKind === 'speech' && input.voice.trim() ? { voice: input.voice.trim() } : {}), ...inspirations };
+  }
+  if (input.tab === 'prd') {
     return {
-      kind,
-      audioKind: input.audioKind,
-      ...(audioModel ? { audioModel } : {}),
-      audioDuration: input.audioDuration,
-      ...(input.audioKind === 'speech' && input.voice.trim()
-        ? { voice: input.voice.trim() }
-        : {}),
-      ...inspirations,
-    };
+      kind: 'prd' as ProjectKind,
+      prdType: 'greenfield',
+      schemaId: 'standard',
+      targetAudience: 'engineering',
+    } as ProjectMetadata;
   }
   return { kind: 'other', ...base, ...inspirations };
 }
