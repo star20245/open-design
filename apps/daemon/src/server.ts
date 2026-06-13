@@ -25,6 +25,7 @@ import {
   resolveExclusiveSurface,
   shouldRenderCodexImagegenOverride,
 } from './prompts/system.js';
+import { composePrdSystemPrompt } from './prompts/prd-composer.js';
 import { expandHomePrefix, resolveProjectRelativePath } from './home-expansion.js';
 import { emittedRenderableQuestionForm } from './question-form-detect.js';
 import { resolveProjectRoot } from './project-root.js';
@@ -11104,7 +11105,54 @@ export async function startServer({
       }
     }
 
-    const prompt = composeSystemPrompt({
+    const isPrdProject = metadata?.kind === 'prd';
+
+    let prompt;
+    if (isPrdProject) {
+      // ── PRD mode: use the PRD 7-layer prompt architecture ─────
+      let prdSchemaBody = '';
+      let prdQualityRulesBody = '';
+
+      // Load the active PRD Schema (SCHEMA.md) from prd-schemas/
+      const activeSchemaId = typeof skillId === 'string' && skillId ? skillId : 'standard';
+      const schemaPath = path.join(PROJECT_ROOT, 'prd-schemas', activeSchemaId, 'SCHEMA.md');
+      try {
+        if (fs.existsSync(schemaPath)) {
+          prdSchemaBody = await fs.promises.readFile(schemaPath, 'utf-8');
+        }
+      } catch { /* schema unavailable */ }
+
+      // Load all PRD quality rules from prd-rules/
+      const rulesDir = path.join(PROJECT_ROOT, 'prd-rules');
+      try {
+        if (fs.existsSync(rulesDir)) {
+          const ruleFiles = await fs.promises.readdir(rulesDir);
+          const ruleBodies = await Promise.all(
+            ruleFiles
+              .filter(f => f.endsWith('.md'))
+              .map(f => fs.promises.readFile(path.join(rulesDir, f), 'utf-8'))
+          );
+          prdQualityRulesBody = ruleBodies.join('\n\n---\n\n');
+        }
+      } catch { /* rules unavailable */ }
+
+      prompt = composePrdSystemPrompt({
+        memoryBody,
+        userInstructions,
+        projectInstructions: undefined,
+        schemaBody: prdSchemaBody || undefined,
+        qualityRulesBody: prdQualityRulesBody || undefined,
+        skillBody: typeof skillBody === 'string' && skillBody ? skillBody : undefined,
+        metadata: {
+          kind: 'prd',
+          prdType: metadata?.prdType,
+          schemaId: activeSchemaId,
+          targetAudience: metadata?.targetAudience,
+        },
+      });
+    } else {
+      // ── Design mode: use the original design 7-layer prompt ───
+      prompt = composeSystemPrompt({
       agentId,
       includeCodexImagegenOverride: false,
       skillBody,
@@ -11148,7 +11196,8 @@ export async function startServer({
       ...(pluginBlock ? { pluginBlock } : {}),
       ...(activeStageBlocks ? { activeStageBlocks } : {}),
       userInstructions,
-    });
+      });
+    }
     // The chat handler also needs to know where the active skill lives
     // on disk so it can stage a per-project copy of its side files
     // before spawning the agent. Returning that here avoids a second
